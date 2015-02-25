@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Assignment.Models.User>
+
+@{
+    ViewBag.Title = "List Users";
+}
+
+<h2>ListUsers2</h2>
+<p>
+    @Html.ActionLink("Create New", "SignUp")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateUser", new { id = item.Id }) |
+                @Html.ActionLink("Details", "DetailUser", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

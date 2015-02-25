@@ -1,0 +1,48 @@
+﻿@model Assignment.Models.CheckUser
+
+@{
+    ViewBag.Title = "Home";
+}
+
+@ViewBag.Msg
+@using (Html.BeginForm("SignIn", "Admin"))
+{
+    @Html.ValidationSummary(true, "SignIn failed. Check your signin details.");
+    <div>
+        <fieldset>
+            <legend>Login</legend>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Username)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.Username)
+                @Html.ValidationMessageFor(u => u.Username)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u => u.Password)
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+            <div class="editor-label">
+                @Html.CheckBoxFor(u => u.Remember)
+                @Html.LabelFor(u => u.Remember)
+            </div>
+            <input type="submit" value="Sign In" />
+        </fieldset>
+    </div>
+}
+
+<h1>Home</h1><br />
+<aside>
+    <ul>
+        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>
+</aside>
+
+
+
