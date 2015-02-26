@@ -34,8 +34,9 @@ namespace Assignment.Models
             }
         }
 
-        public static SqlDataReader Query(SqlCommand cmd) 
+        public static List<SqlDataReader> Query(SqlCommand cmd) 
         {
+            List<SqlDataReader> list = null;
             SqlDataReader data = null;
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -43,10 +44,14 @@ namespace Assignment.Models
                 cmd.Connection = con;
                 data = cmd.ExecuteReader();
 
-                if (data.Read()){
-                    return data;
+                //if (data.Read()){
+                //    return data;
+                //}
+                while(data.Read())
+                {
+                    list.Add(data);
                 }
-                return data;
+                return list;
             }
         }
 

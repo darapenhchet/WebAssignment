@@ -10,60 +10,23 @@
 </head>
 <body>
     <header>
-        <div class="profile">
-            @if (Request.IsAuthenticated)
-            {
+        @if (Request.IsAuthenticated)
+        {
+            <div class="profile">
                 <span>@Html.Encode(User.Identity.Name)</span>
                 <ul>
                     <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Admin")</li>
                     <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Admin")</li>
                     <li>@Html.ActionLink("Sign Out", "SignOut", "Admin")</li>
                 </ul>
-            }
-            
-            else
-            {
-                @model Assignment.Models.ViewModel
-                
-                var item = Model.SignIn;
-                              
-                using (Html.BeginForm("SignIn", "Admin"))
-                {
-                    @Html.ValidationSummary(true, "SignIn failed. Check your signin details.");
-
-                    <div class="frm">
-                            
-                        <div class="lbl">
-                            @Html.LabelFor(u => item.Username)
-                        </div>
-                        <div class="txt">
-                            @Html.TextBoxFor(u => item.Username)
-                            @Html.ValidationMessageFor(u => item.Username)
-                        </div>
-                        <div class="lbl">
-                            @Html.LabelFor(u => item.Password)
-                        </div>
-                        <div class="txt">
-                            @Html.PasswordFor(u => item.Password)
-                            @Html.ValidationMessageFor(u => item.Password)
-                        </div>
-                        <div class="lbl">
-                            @Html.CheckBoxFor(u => item.Remember)
-                            @Html.LabelFor(u => item.Remember)
-                        </div>
-                        <input type="submit" value="Sign In" />
-                        @Html.ActionLink("Sign Up", "SignUp", "Admin")
-                            
-                    </div>
-                }
-            }
-        </div>
+            </div>
+        }
         <nav>
             <ul>
-                <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li><a href="#home">Khmer Demo</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#admin">Admin</a></li>
             </ul>
         </nav>
     </header>

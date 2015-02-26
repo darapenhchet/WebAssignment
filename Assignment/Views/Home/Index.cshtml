@@ -3,29 +3,140 @@
     ViewBag.Title = "Home";
 }
 
-<section>
+<section id="home">
     <article>
-        <h3></h3>
+        <h3>Welcome to Khmer Demo</h3>
+        <div>
+            Welcome
+        </div>
+    </article>
+</section>
+
+<section id="project">
+    <article>
+        <h3>Website Project</h3>
         <div>
             @try {
                 foreach (var item in Model.Posts) {
                     <div class="post-title">@Html.DisplayFor(model => item.Title)</div>
-                    <div class="post-date"></div>
-                    <div class="post-descritpion">
-                        @Html.DisplayFor(model => item.Description)
-                    </div>
-                }
-                    
-                    
+                    <div class="post-date">@Html.DisplayFor(model => item.Date)</div>
+                    <div class="post-descritpion">@Html.DisplayFor(model => item.Content)</div>
+                }       
             }
-            catch (NullReferenceException ex) { 
-                    
+            catch (NullReferenceException ex) {  
                 <p>No Article</p>
             }
         </div>
     </article>
 </section>
 
+<section id="about">
+    <article>
+        <h3>About Developer</h3>
+        <div>
+            <ul>
+                <li>Yo Vannaravuth</li>
+                <li>Dara Penhchet</li>
+                <li>Dara Penhchet</li>
+                <li>Dara Penhchet</li>
+                <li>Dara Penhchet</li>
+            </ul>
+        </div>
+    </article>
+</section>
 
+<section id="admin">
+    <article>
+        <h3></h3>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true, "SignIn failed. Check your signin details.");
 
+                <div class="frm">
+                            
+                    <div class="lbl">
+                        @Html.LabelFor(u => u.SignIn.Username)
+                    </div>
+                    <div class="txt">
+                        @Html.TextBoxFor(u => u.SignIn.Username)
+                        @Html.ValidationMessageFor(u => u.SignIn.Username)
+                    </div>
+                    <div class="lbl">
+                        @Html.LabelFor(u => u.SignIn.Password)
+                    </div>
+                    <div class="txt">
+                        @Html.PasswordFor(u => u.SignIn.Password)
+                        @Html.ValidationMessageFor(u => u.SignIn.Password)
+                    </div>
+                    <div class="lbl">
+                        @Html.CheckBoxFor(u => u.SignIn.Remember)
+                        @Html.LabelFor(u => u.SignIn.Remember)
+                    </div>
+                    <input type="submit" value="Sign In" />
+                    @Html.ActionLink("Sign Up", "SignUp", "Admin")
+                            
+                </div>
+            }
+        </div>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true, "SignUp failed. Check your signin details.");
 
+                <div class="frm">
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Username)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(u => u.SignUp.Username)
+                        @Html.ValidationMessageFor(u => u.SignUp.Username)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Password)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(u => u.SignUp.Password)
+                        @Html.ValidationMessageFor(u => u.SignUp.Password)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.ConfirmPassword)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(u => u.SignUp.ConfirmPassword)
+                        @Html.ValidationMessageFor(u => u.SignUp.ConfirmPassword)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Firstname)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(u => u.SignUp.Firstname)
+                        @Html.ValidationMessageFor(u => u.SignUp.Firstname)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Lastname)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(u => u.SignUp.Lastname)
+                        @Html.ValidationMessageFor(u => u.SignUp.Lastname)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Address)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(u => u.SignUp.Address)
+                        @Html.ValidationMessageFor(u => u.SignUp.Address)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(u => u.SignUp.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(u => u.SignUp.Email)
+                        @Html.ValidationMessageFor(u => u.SignUp.Email)
+                    </div>
+                    <input type="submit" value="Sign Up" />
+                </div>
+            }
+        </div>
+    </article>
+</section>

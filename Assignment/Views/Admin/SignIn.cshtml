@@ -8,7 +8,7 @@
 @using (Html.BeginForm("SignIn", "Admin"))
 {
     //var item = Model;
-   @* @Html.ValidationSummary(true, "SignIn failed. Check your signin details."); *@
+    @Html.ValidationSummary(true, "SignIn failed. Check your signin details."); 
     <div>
             <div class="editor-label">
                 @Html.LabelFor(u => u.Username)

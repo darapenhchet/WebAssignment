@@ -11,6 +11,7 @@ namespace Assignment.Models
         public IEnumerable<GetUser> Users { get; set; }
         
         public GetUser User { get; set; }
-        public SignInModel SignIn { get; set; }
+        public SignIn SignIn { get; set; }
+        public InsertUser SignUp { get; set; }
     }
 }

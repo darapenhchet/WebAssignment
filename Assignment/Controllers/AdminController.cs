@@ -44,12 +44,13 @@ namespace Assignment.Controllers
         }
 
         [HttpGet]
-        public ActionResult SignIn() {
+        public ActionResult SignIn()
+        {
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignIn(SignInModel user) {
+        public ActionResult SignIn(SignIn user) {
             if (ModelState.IsValid) {
                 if (AccountDAO.SignIn(user))
                 {

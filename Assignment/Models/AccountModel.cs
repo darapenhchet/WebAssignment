@@ -34,7 +34,7 @@ namespace Assignment.Models
         public string Lastname { get; set; }
     }
 
-    public class SignInModel {
+    public class SignIn {
         [Required(ErrorMessage = "You must enter the username.")]
         [Display(Name = "Username")]
         public string Username { get; set; }

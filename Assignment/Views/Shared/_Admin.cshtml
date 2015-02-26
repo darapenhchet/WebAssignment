@@ -10,23 +10,27 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if (Request.IsAuthenticated)
+                {
     <header>
         <div class="container">
             <div class="profile">
-                @if (Request.IsAuthenticated)
-                {
+                
                     <span>@Html.Encode(User.Identity.Name)</span>
                     <ul>
                         <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Admin")</li>
                         <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Admin")</li>
+                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Admin")</li>
                         <li>@Html.ActionLink("Sign Out", "SignOut", "Admin")</li>
                     </ul> 
-                } 
+                 
             </div>
         </div>
     </header>
-
+                }  
     <section>
+        @if (Request.IsAuthenticated)
+                {
         <aside>
             <nav>
                 <ul>
@@ -35,7 +39,7 @@
                 </ul>
             </nav>
         </aside>
-
+        }
         <div class="container">
             @RenderBody()
             @Scripts.Render("~/bundles/jquery")
@@ -46,6 +50,6 @@
     <footer>
 
     </footer>
-   
+                
 </body>
 </html>

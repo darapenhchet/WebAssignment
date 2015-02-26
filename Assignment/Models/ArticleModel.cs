@@ -9,12 +9,15 @@ namespace Assignment.Models
     public class GetPost {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
+        public string Content { get; set; }
+        public string Photo { get; set; }
+        public string Category { get; set; }
+        public System.DateTime Date { get; set; }
     }
     
     public class SetPost
     {
+        [Display(Name="Id")]
         public int Id { get; set; }
 
         [Required]
@@ -24,11 +27,16 @@ namespace Assignment.Models
 
         [Required]
         [MinLength(5)]
-        [Display(Name = "Description")]
-        public string Description { get; set; }
+        [Display(Name = "Content")]
+        public string Content { get; set; }
 
-        [Display(Name = "Type")]
-        public string Type { get; set; }
+        [Display(Name = "Photo")]
+        public string Photo { get; set; }
+
+        [Display(Name = "Category")]
+        public string Category { get; set; }
+
+        public System.DateTime Date { get; set; }
     }
 
 }

@@ -24,8 +24,8 @@ namespace Assignment.Models
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.Add(new SqlParameter("@title", SqlDbType.NVarChar)).Value = p.Title;
-                cmd.Parameters.Add(new SqlParameter("@description", SqlDbType.NVarChar)).Value = p.Description;
-                cmd.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar)).Value = p.Type;
+                cmd.Parameters.Add(new SqlParameter("@description", SqlDbType.NVarChar)).Value = p.Content;
+                cmd.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar)).Value = p.Category;
 
                 con.Open();
                 if (cmd.ExecuteNonQuery() != 0)
@@ -55,8 +55,8 @@ namespace Assignment.Models
                     {
                         Id = (int)dat["Id"],
                         Title = dat["Title"].ToString(),
-                        Description = dat["Description"].ToString(),
-                        Type = dat["Type"].ToString()
+                        Content = dat["Description"].ToString(),
+                        Category = dat["Type"].ToString()
                     };
                     articles.Add(post);
                 }

@@ -18,7 +18,7 @@ namespace Assignment.Models
         private static string cs = "Data Source=RAVUTHZ;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
         //private static string cs = ConfigurationManager.ConnectionStrings["MyDBConnectionString1"].ConnectionString;
 
-        public static bool SignIn(SignInModel u)
+        public static bool SignIn(SignIn u)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -62,28 +62,16 @@ namespace Assignment.Models
 
         public static bool CreateUser(InsertUser u)
         {
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                string sql = @"INSERT INTO [dbo].[Users] ([Username], [Password], [Email], [Firstname], [Lastname], [Address])"
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"INSERT INTO [dbo].[Users] ([Username], [Password], [Email], [Firstname], [Lastname], [Address])"
                     + " VALUES (@user,  @pass, @email, @first, @last, @address)";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = u.Username;
-                cmd.Parameters.Add(new SqlParameter("@pass", SqlDbType.NVarChar)).Value = u.Password;
-                cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar)).Value = u.Email;
-                cmd.Parameters.Add(new SqlParameter("@first", SqlDbType.NVarChar)).Value = u.Firstname;
-                cmd.Parameters.Add(new SqlParameter("@last", SqlDbType.NVarChar)).Value = u.Lastname;
-                cmd.Parameters.Add(new SqlParameter("@address", SqlDbType.NVarChar)).Value = u.Address;
-
-                con.Open();
-                if (cmd.ExecuteNonQuery() != 0)
-                {
-                    cmd.Dispose();
-                    return true;
-                }
-                cmd.Dispose();
-                return false;
-            }
+            cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = u.Username;
+            cmd.Parameters.Add(new SqlParameter("@pass", SqlDbType.NVarChar)).Value = u.Password;
+            cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar)).Value = u.Email;
+            cmd.Parameters.Add(new SqlParameter("@first", SqlDbType.NVarChar)).Value = u.Firstname;
+            cmd.Parameters.Add(new SqlParameter("@last", SqlDbType.NVarChar)).Value = u.Lastname;
+            cmd.Parameters.Add(new SqlParameter("@address", SqlDbType.NVarChar)).Value = u.Address;
+            return DB.Action(cmd);
         }
 
         public static GetUser DetailUser(int id)
@@ -151,78 +139,36 @@ namespace Assignment.Models
 
         public static bool DeleteUser(int id)
         {
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                //string sql = @"DELETE [dbo].[Users] WHERE Id =@id";
-
-                //SqlCommand cmd = new SqlCommand(sql, con);
-                //cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
-                
-                //con.Open();
-                //if (cmd.ExecuteNonQuery() != 0)
-                //{
-                //    cmd.Dispose();
-                //    return true;
-                //}
-                //cmd.Dispose();
-                //return false;
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = @"DELETE [dbo].[Users] WHERE Id = @id";
-                cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
-                return DB.Action(cmd);
-            }
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"DELETE [dbo].[Users] WHERE Id = @id";
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
+            return DB.Action(cmd);
         }
         
         public static bool UpdateUser(UpdateUser u)
         {
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                string sql = @"UPDATE [dbo].[Users] SET [Username] = @user, [Email] = @email, "
-                    + "[Firstname] = @first, [Lastname] = @last, [Address] = @address WHERE Id = @id";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = u.Username;
-                cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar)).Value = u.Email;
-                cmd.Parameters.Add(new SqlParameter("@first", SqlDbType.NVarChar)).Value = u.Firstname;
-                cmd.Parameters.Add(new SqlParameter("@last", SqlDbType.NVarChar)).Value = u.Lastname;
-                cmd.Parameters.Add(new SqlParameter("@address", SqlDbType.NVarChar)).Value = u.Address;
-                cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = u.Id;
-
-                con.Open();
-                if (cmd.ExecuteNonQuery() != 0)
-                {
-                    cmd.Dispose();
-                    return true;
-                }
-                    cmd.Dispose();
-                    return false;
-            }
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"UPDATE [dbo].[Users] SET [Username] = @user, [Email] = @email, "
+                + "[Firstname] = @first, [Lastname] = @last, [Address] = @address WHERE Id = @id";
+            cmd.Parameters.Add(new SqlParameter("@user", SqlDbType.NVarChar)).Value = u.Username;
+            cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.NVarChar)).Value = u.Email;
+            cmd.Parameters.Add(new SqlParameter("@first", SqlDbType.NVarChar)).Value = u.Firstname;
+            cmd.Parameters.Add(new SqlParameter("@last", SqlDbType.NVarChar)).Value = u.Lastname;
+            cmd.Parameters.Add(new SqlParameter("@address", SqlDbType.NVarChar)).Value = u.Address;
+            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = u.Id;
+            return DB.Action(cmd);
         }
         
         public static bool ChangePassword(ChangePassword p)
         {
+            SqlCommand cmd = new SqlCommand();
             if (p.OldPassword == AccountDAO.Password)
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    string sql = @"UPDATE [dbo].[Users] SET [Password] = @pw WHERE Id = @id";
-
-                    SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.Parameters.Add(new SqlParameter("@pw", SqlDbType.NVarChar)).Value = p.NewPassword;
-                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = AccountDAO.Id;
-
-                    con.Open();
-                    if (cmd.ExecuteNonQuery() != 0)
-                    {
-                        cmd.Dispose();
-                        return true;
-                    }
-                    cmd.Dispose();
-                    return false;
-                }
+                cmd.CommandText = @"UPDATE [dbo].[Users] SET [Password] = @pw WHERE Id = @id";
+                cmd.Parameters.Add(new SqlParameter("@pw", SqlDbType.NVarChar)).Value = p.NewPassword;
+                cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = AccountDAO.Id;
             }
-            return false;
+            return DB.Action(cmd);
         }
 
         public static List<GetUser> ListAllUsers()
