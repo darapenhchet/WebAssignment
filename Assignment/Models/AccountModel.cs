@@ -10,18 +10,31 @@ using System.Data.SqlClient;
 
 namespace Assignment.Models
 {
-    public class User
+    /* For action Detail, List, Edit users */
+    public class GetUser
     {
+        [Display(Name = "Id")]
         public int Id { get; set; }
+
+        [Display(Name = "Username")]
         public string Username { get; set; }
+
         public string Password { get; set; }
+
+        [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Display(Name = "Firstname")]
         public string Firstname { get; set; }
+
+        [Display(Name = "Lastname")]
         public string Lastname { get; set; }
     }
 
-    public class CheckUser {
+    public class SignInModel {
         [Required(ErrorMessage = "You must enter the username.")]
         [Display(Name = "Username")]
         public string Username { get; set; }
@@ -98,27 +111,6 @@ namespace Assignment.Models
         public string Lastname { get; set; }
     }
 
-    public class DetailUser
-    {
-        [Display(Name="Id")]
-        public int Id { get; set; }
-
-        [Display(Name = "Username")]
-        public string Username { get; set; }
-
-        [Display(Name = "Address")]
-        public string Address { get; set; }
-
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Display(Name = "Firstname")]
-        public string Firstname { get; set; }
-
-        [Display(Name = "Lastname")]
-        public string Lastname { get; set; }
-    }
-
     public class DeleteUser
     {
         [Display(Name = "Id")]
@@ -143,7 +135,5 @@ namespace Assignment.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
-
 
 }

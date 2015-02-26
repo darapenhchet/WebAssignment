@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Assignment.Models.User>
+﻿@model IEnumerable<Assignment.Models.GetUser>
 
 @{
     ViewBag.Title = "List Users";
@@ -31,32 +31,40 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
+    @try { 
+    
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateUser", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "DetailUser", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                </td>
+            </tr>
+        }    
+        
+    } catch (NullReferenceException ex) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lastname)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateUser", new { id = item.Id }) |
-                @Html.ActionLink("Details", "DetailUser", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
-            </td>
+            <td>No Article</td>
         </tr>
     }
 

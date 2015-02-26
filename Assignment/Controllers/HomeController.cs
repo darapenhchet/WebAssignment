@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Assignment.Models;
 
 namespace Assignment.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
 
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            ViewModel mymodel = new ViewModel();
+            mymodel.Users = AccountDAO.ListAllUsers();
+            mymodel.Posts = ArticleDAO.List();
+            return View(mymodel);
         }
+
+
 
     }
 }

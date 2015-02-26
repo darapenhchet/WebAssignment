@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace Assignment.Models
 {
-    public class Account
+    public class AccountDAO
     {
         private static int Id;
         private static string Username, Password, Firstname, Lastname, Email, Address;
@@ -18,12 +18,7 @@ namespace Assignment.Models
         private static string cs = "Data Source=RAVUTHZ;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
         //private static string cs = ConfigurationManager.ConnectionStrings["MyDBConnectionString1"].ConnectionString;
 
-        public static void Init(string con, string tbl, string usr, string pw)
-        {
-
-        }
-
-        public static bool SignIn(CheckUser u)
+        public static bool SignIn(SignInModel u)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -91,7 +86,7 @@ namespace Assignment.Models
             }
         }
 
-        public static User DetailUser(int id)
+        public static GetUser DetailUser(int id)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -102,7 +97,7 @@ namespace Assignment.Models
 
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                User user = new User();
+                GetUser user = new GetUser();
                 if (reader.Read())
                 {
                     user.Username = reader["Username"].ToString();
@@ -115,7 +110,45 @@ namespace Assignment.Models
                 return user;
             }
         }
-        
+
+        public static GetUser FindUser(object user)
+        {
+            string sql = null;
+            SqlCommand cmd = null;
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                if (user is int)
+                {
+                    sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p";
+                    cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.Add(new SqlParameter("@p", SqlDbType.Int)).Value = (int)user;
+                }
+                else
+                {
+                    sql = @"SELECT * FROM [dbo].[Users] WHERE Username = @p";
+                    cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.Add(new SqlParameter("@p", SqlDbType.NVarChar)).Value = user.ToString();
+                }
+                
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                GetUser us = null;
+                if (reader.Read())
+                {
+                    Id = (int)reader["Id"];
+                    Username = reader["Username"].ToString();
+                    Password = reader["Password"].ToString();
+                    Firstname = reader["Firstname"].ToString();
+                    Lastname = reader["Lastname"].ToString();
+                    Email = reader["Email"].ToString();
+                    Address = reader["Address"].ToString();
+                }
+                return us;
+            }
+        }
+
         public static bool DeleteUser(int id)
         {
             using (SqlConnection con = new SqlConnection(cs))
@@ -164,7 +197,7 @@ namespace Assignment.Models
         
         public static bool ChangePassword(ChangePassword p)
         {
-            if (p.OldPassword == Account.Password)
+            if (p.OldPassword == AccountDAO.Password)
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
@@ -172,7 +205,7 @@ namespace Assignment.Models
 
                     SqlCommand cmd = new SqlCommand(sql, con);
                     cmd.Parameters.Add(new SqlParameter("@pw", SqlDbType.NVarChar)).Value = p.NewPassword;
-                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = Account.Id;
+                    cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = AccountDAO.Id;
 
                     con.Open();
                     if (cmd.ExecuteNonQuery() != 0)
@@ -187,11 +220,11 @@ namespace Assignment.Models
             return false;
         }
 
-        public static List<User> ListAllUsers()
+        public static List<GetUser> ListAllUsers()
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                List<User> list = new List<User>();
+                List<GetUser> list = new List<GetUser>();
                 string sql = @"SELECT * FROM [dbo].[Users]";
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -200,7 +233,7 @@ namespace Assignment.Models
 
                 while (reader.Read())
                 {
-                    User user = new User();
+                    GetUser user = new GetUser();
                     user.Username = reader["Username"].ToString();
                     user.Address = reader["Address"].ToString();
                     user.Email = reader["Email"].ToString();

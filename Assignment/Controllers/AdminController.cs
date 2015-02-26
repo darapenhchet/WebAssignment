@@ -34,7 +34,7 @@ namespace Assignment.Controllers
         public ActionResult SignUp(InsertUser user)
         {
             if (ModelState.IsValid) {
-                if (Account.CreateUser(user))
+                if (AccountDAO.CreateUser(user))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -49,11 +49,12 @@ namespace Assignment.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignIn(CheckUser user) {
+        public ActionResult SignIn(SignInModel user) {
             if (ModelState.IsValid) {
-                if (Account.SignIn(user))
+                if (AccountDAO.SignIn(user))
                 {
                     FormsAuthentication.SetAuthCookie(user.Username, user.Remember);
+                    Session["uid"] = AccountDAO.getId();
                     return RedirectToAction("Index", "Admin");
                 }
             }
@@ -62,7 +63,7 @@ namespace Assignment.Controllers
         }
 
         public ActionResult SignOut() {
-            Account.SignOut();
+            AccountDAO.SignOut();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
@@ -72,7 +73,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                User user = Account.DetailUser(Account.getId());
+                GetUser user = AccountDAO.DetailUser(AccountDAO.getId());
                 return View(user);
             }
             else
@@ -86,7 +87,7 @@ namespace Assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Account.UpdateUser(user))
+                if (AccountDAO.UpdateUser(user))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -104,7 +105,7 @@ namespace Assignment.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                User user = Account.DetailUser(id);
+                GetUser user = AccountDAO.DetailUser(id);
                 if (user == null)
                 {
                     return HttpNotFound();
@@ -120,7 +121,7 @@ namespace Assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Account.UpdateUser(user))
+                if (AccountDAO.UpdateUser(user))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -134,7 +135,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View(Account.DetailUser(Account.getId()));
+                return View(AccountDAO.DetailUser(AccountDAO.getId()));
             }
             return RedirectToAction("SignIn", "Admin");   
         }
@@ -148,7 +149,7 @@ namespace Assignment.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                return View(Account.DetailUser(id));
+                return View(AccountDAO.DetailUser(id));
             }
             return RedirectToAction("SignIn", "Admin");  
         }
@@ -158,7 +159,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                User user = Account.DetailUser(id);
+                GetUser user = AccountDAO.DetailUser(id);
                 if (user == null)
                 {
                     return HttpNotFound();
@@ -173,7 +174,7 @@ namespace Assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Account.DeleteUser(user.Id))
+                if (AccountDAO.DeleteUser(user.Id))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -198,7 +199,7 @@ namespace Assignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Account.ChangePassword(p))
+                if (AccountDAO.ChangePassword(p))
                 {
                     return RedirectToAction("Index", "Admin");
                 }
@@ -212,7 +213,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View(Account.ListAllUsers());
+                return View(AccountDAO.ListAllUsers());
             }
             return RedirectToAction("SignIn", "Admin"); 
         }

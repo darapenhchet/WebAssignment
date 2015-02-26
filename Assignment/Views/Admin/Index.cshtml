@@ -1,8 +1,7 @@
-﻿@model Assignment.Models.CheckUser
+﻿@model Assignment.Models.ViewModel
 @{
     ViewBag.Title = "Admin";
 }
-@ViewBag.Msg
 <div>
         <strong>@Html.Encode(User.Identity.Name)</strong>
         <br/>@Html.ActionLink("Sign Out", "SignOut", "Admin")
