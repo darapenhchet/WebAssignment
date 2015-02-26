@@ -1,32 +1,32 @@
-﻿@model Assignment.Models.ViewModel
+﻿@model Assignment.Models.SignInModel
 @{
     ViewBag.Title = "Sign In";
 }
 
 <h2>Login</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SignIn", "Admin"))
 {
-    var item = Model.SignIn;
-    @Html.ValidationSummary(true, "SignIn failed. Check your signin details.");
+    //var item = Model;
+   @* @Html.ValidationSummary(true, "SignIn failed. Check your signin details."); *@
     <div>
             <div class="editor-label">
-                @Html.LabelFor(u => item.Username)
+                @Html.LabelFor(u => u.Username)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(u => item.Username)
-                @Html.ValidationMessageFor(u => item.Username)
+                @Html.TextBoxFor(u => u.Username)
+                @Html.ValidationMessageFor(u => u.Username)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(u => item.Password)
+                @Html.LabelFor(u => u.Password)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(u => item.Password)
-                @Html.ValidationMessageFor(u => item.Password)
+                @Html.PasswordFor(u => u.Password)
+                @Html.ValidationMessageFor(u => u.Password)
             </div>
             <div class="editor-label">
-                @Html.CheckBoxFor(u => item.Remember)
-                @Html.LabelFor(u => item.Remember)
+                @Html.CheckBoxFor(u => u.Remember)
+                @Html.LabelFor(u => u.Remember)
             </div>
             <input type="submit" value="Sign In" />
     </div>

@@ -15,11 +15,8 @@ namespace Assignment.Controllers
         {
             ViewModel mymodel = new ViewModel();
             mymodel.Users = AccountDAO.ListAllUsers();
-            mymodel.Posts = ArticleDAO.List();
+            //mymodel.Posts = ArticleDAO.List();
             return View(mymodel);
         }
-
-
-
     }
 }

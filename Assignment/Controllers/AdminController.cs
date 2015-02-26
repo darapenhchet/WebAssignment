@@ -54,7 +54,6 @@ namespace Assignment.Controllers
                 if (AccountDAO.SignIn(user))
                 {
                     FormsAuthentication.SetAuthCookie(user.Username, user.Remember);
-                    Session["uid"] = AccountDAO.getId();
                     return RedirectToAction("Index", "Admin");
                 }
             }

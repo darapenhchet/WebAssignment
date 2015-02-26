@@ -153,19 +153,24 @@ namespace Assignment.Models
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                string sql = @"DELETE [dbo].[Users] WHERE Id =@id";
+                //string sql = @"DELETE [dbo].[Users] WHERE Id =@id";
 
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
+                //SqlCommand cmd = new SqlCommand(sql, con);
+                //cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
                 
-                con.Open();
-                if (cmd.ExecuteNonQuery() != 0)
-                {
-                    cmd.Dispose();
-                    return true;
-                }
-                cmd.Dispose();
-                return false;   
+                //con.Open();
+                //if (cmd.ExecuteNonQuery() != 0)
+                //{
+                //    cmd.Dispose();
+                //    return true;
+                //}
+                //cmd.Dispose();
+                //return false;
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"DELETE [dbo].[Users] WHERE Id = @id";
+                cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = id;
+                return DB.Action(cmd);
             }
         }
         

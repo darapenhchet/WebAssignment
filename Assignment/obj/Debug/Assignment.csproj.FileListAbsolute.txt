@@ -46,3 +46,4 @@ C:\Users\Ravuth\Downloads\WebAssignment\Assignment\bin\System.Web.WebPages.Deplo
 C:\Users\Ravuth\Downloads\WebAssignment\Assignment\bin\System.Web.WebPages.Razor.xml
 C:\Users\Ravuth\Downloads\WebAssignment\Assignment\obj\Debug\Assignment.dll
 C:\Users\Ravuth\Downloads\WebAssignment\Assignment\obj\Debug\Assignment.pdb
+C:\Users\Ravuth\Downloads\WebAssignment\Assignment\obj\Debug\Assignment.csprojResolveAssemblyReference.cache
