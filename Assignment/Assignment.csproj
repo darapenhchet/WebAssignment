@@ -139,7 +139,7 @@
     <Compile Include="Models\AccountDAO.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ArticleModel.cs" />
-    <Compile Include="Models\DAO.cs" />
+    <Compile Include="Models\DB.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

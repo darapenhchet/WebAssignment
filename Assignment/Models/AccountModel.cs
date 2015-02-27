@@ -34,6 +34,45 @@ namespace Assignment.Models
         public string Lastname { get; set; }
     }
 
+    public class SetUser
+    {
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Address")]
+        [StringLength(250, MinimumLength = 2)]
+        public string Address { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        [StringLength(150, MinimumLength = 11)]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Firstname")]
+        public string Firstname { get; set; }
+
+        [Required]
+        [Display(Name = "Lastname")]
+        public string Lastname { get; set; }
+    }
+
     public class SignIn {
         [Required(ErrorMessage = "You must enter the username.")]
         [Display(Name = "Username")]
@@ -48,7 +87,10 @@ namespace Assignment.Models
         public bool Remember { get; set; }
     }
 
+    
+
     public class InsertUser {
+
         [Required(ErrorMessage = "You must enter the username.")]
         [Display(Name = "Username")]
         public string Username { get; set; }
