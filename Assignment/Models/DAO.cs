@@ -19,11 +19,22 @@ namespace Assignment.Models
 
         public static string ConnectionString { get; set; }
 
-        public static bool Action(SqlCommand cmd) {
+        public static bool Action(string sql, params object[] fields)
+        {
             using (SqlConnection con = new SqlConnection(cs))
             {
                 con.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = sql;
                 cmd.Connection = con;
+
+                int i = 1;
+                foreach(var field in fields)
+                {
+                    cmd.Parameters.AddWithValue("@p" + i, field);
+                    i++;
+                }
+
                 if (cmd.ExecuteNonQuery() != 0)
                 {
                     cmd.Dispose();
@@ -34,57 +45,67 @@ namespace Assignment.Models
             }
         }
 
-        public static List<SqlDataReader> Query(SqlCommand cmd) 
+        public static DataSet Query(string sql, params object[] fields)
         {
-            List<SqlDataReader> list = null;
-            SqlDataReader data = null;
+            DataSet dataset = new DataSet();
             using (SqlConnection con = new SqlConnection(cs))
             {
+                
                 con.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = sql;
                 cmd.Connection = con;
-                data = cmd.ExecuteReader();
 
-                //if (data.Read()){
-                //    return data;
-                //}
-                while(data.Read())
+                int i = 1;
+                foreach (var field in fields)
                 {
-                    list.Add(data);
+                    cmd.Parameters.AddWithValue("@p" + i, field);
+                    i++;
                 }
-                return list;
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataset);
+                return dataset;
             }
         }
 
-
-
-        public static string Select() {
-            string sql = @"SELECT * FROM [dbo].[Articles] WHERE Id = @id";
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = sql;
-            cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = 1;
-
-            SqlDataReader data = Query(cmd);
-
-            if (data != null) {
-                return "OK";           
+        public static GetUser GetUserDS(DataSet ds) 
+        {
+            GetUser user = null;
+            if (ds.Tables[0].Rows[0] != null)
+            {
+                user = new GetUser();
+                user.Id = (int)ds.Tables[0].Rows[0]["Id"];
+                user.Username = ds.Tables[0].Rows[0]["Username"].ToString();
+                user.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                user.Firstname = ds.Tables[0].Rows[0]["Firstname"].ToString();
+                user.Lastname = ds.Tables[0].Rows[0]["Lastname"].ToString();
+                user.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                user.Address = ds.Tables[0].Rows[0]["Address"].ToString();
             }
-            return "Fail";
+            return user;
+        }
+
+        public static List<GetUser> GetUsersDS(DataSet ds)
+        {
+            GetUser user = null;
+            List<GetUser> list = new List<GetUser>();
             
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                user = new GetUser();
+                user.Id = (int)ds.Tables[0].Rows[0]["Id"];
+                user.Username = ds.Tables[0].Rows[0]["Username"].ToString();
+                user.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                user.Firstname = ds.Tables[0].Rows[0]["Firstname"].ToString();
+                user.Lastname = ds.Tables[0].Rows[0]["Lastname"].ToString();
+                user.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                user.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                list.Add(user);
+            }
+            return list;
         }
 
-        public static void Insert() {
-            string sql = @"INSERT INTO [dbo].[Articles] ([Title], [Content])"
-                    + " VALUES (@title,  @content)";
 
-            //SqlCommand cmd = new SqlCommand(sql, con);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = sql;
-            cmd.Parameters.Add(new SqlParameter("@title", SqlDbType.NVarChar)).Value = "insertOK1";
-            cmd.Parameters.Add(new SqlParameter("@content", SqlDbType.NVarChar)).Value = "OK1";
-            Action(cmd);
-        }
-
-       
     }
 }
