@@ -12,18 +12,21 @@ namespace Assignment.Models
 {
     public class AccountDAO
     {
-        private static int Id;
-        private static string Username, Password, Firstname, Lastname, Email, Address;
-
-        //private static string cs = "Data Source=RAVUTHZ;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
-        //private static string cs = ConfigurationManager.ConnectionStrings["MyDBConnectionString1"].ConnectionString;
+        public static int Id { get; set; }
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+        public static string Firstname { get; set; }
+        public static string Lastname { get; set; }
+        public static string Email { get; set; }
+        public static string Address { get; set; }
 
         public static bool SignIn(SignIn u)
         {
             string sql = @"SELECT * FROM [dbo].[Users] WHERE [Username] = @p1 AND [Password] = @p2";
             DataSet ds = DB.Query(sql, u.Username, u.Password);
-          
-            if (ds.Tables[0].Rows[0] != null) {
+
+            try
+            {
                 Id = (int)ds.Tables[0].Rows[0]["Id"];
                 Username = ds.Tables[0].Rows[0]["Username"].ToString();
                 Password = ds.Tables[0].Rows[0]["Password"].ToString();
@@ -33,7 +36,10 @@ namespace Assignment.Models
                 Address = ds.Tables[0].Rows[0]["Address"].ToString();
                 return true;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public static void SignOut() {
@@ -56,61 +62,27 @@ namespace Assignment.Models
         public static GetUser DetailUser(int id)
         {
             string sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p1";
-            DataSet ds = DB.Query(sql, id);
+            DataSet ds = DB.Query(sql, id);  
             return DB.GetUserDS(ds);
         }
 
-        public static GetUser FindUser(object user)
+        public static void FindUser(object user)
         {
-            //string sql = null;
-            //SqlCommand cmd = null;
-
-            //using (SqlConnection con = new SqlConnection(cs))
-            //{
-            //    if (user is int)
-            //    {
-            //        sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p";
-            //        cmd = new SqlCommand(sql, con);
-            //        cmd.Parameters.Add(new SqlParameter("@p", SqlDbType.Int)).Value = (int)user;
-            //    }
-            //    else
-            //    {
-            //        sql = @"SELECT * FROM [dbo].[Users] WHERE Username = @p";
-            //        cmd = new SqlCommand(sql, con);
-            //        cmd.Parameters.Add(new SqlParameter("@p", SqlDbType.NVarChar)).Value = user.ToString();
-            //    }
-                
-
-            //    con.Open();
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    GetUser us = null;
-            //    if (reader.Read())
-            //    {
-            //        Id = (int)reader["Id"];
-            //        Username = reader["Username"].ToString();
-            //        Password = reader["Password"].ToString();
-            //        Firstname = reader["Firstname"].ToString();
-            //        Lastname = reader["Lastname"].ToString();
-            //        Email = reader["Email"].ToString();
-            //        Address = reader["Address"].ToString();
-            //    }
-            //    return us;
-            //}
-
-            string sql = null;
-            DataSet ds = new DataSet();
-            if (user is int)
+            string sql = @"SELECT * FROM [dbo].[Users] WHERE Username = @p1";
+            DataSet ds = DB.Query(sql, user.ToString());
+            try
             {
-                sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p1";
-                ds = DB.Query(sql, (int)user);
+                Id = (int)ds.Tables[0].Rows[0]["Id"];
+                Username = ds.Tables[0].Rows[0]["Username"].ToString();
+                Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                Firstname = ds.Tables[0].Rows[0]["Firstname"].ToString();
+                Lastname = ds.Tables[0].Rows[0]["Lastname"].ToString();
+                Email = ds.Tables[0].Rows[0]["Email"].ToString();
+                Address = ds.Tables[0].Rows[0]["Address"].ToString();
             }
-            else
+            catch (Exception ex)
             {
-                sql = @"SELECT * FROM [dbo].[Users] WHERE Username = @p1";
-                ds = DB.Query(sql, user.ToString());
             }
-            
-            return DB.GetUserDS(ds);
         }
 
         public static bool DeleteUser(int id)
@@ -140,18 +112,7 @@ namespace Assignment.Models
         {
             string sql = @"SELECT * FROM [dbo].[Users]";
             DataSet ds = DB.Query(sql);
-            return DB.GetUsersDS(ds);
+            return DB.GetAllUserDS(ds);
         }
-
-        public static int getId() 
-        {
-            return Id;
-        }
-
-        public static string getUsername()
-        {
-            return Username;
-        }
-
     }
 }

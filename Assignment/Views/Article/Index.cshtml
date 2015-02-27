@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => item.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => item.Description)
+                @Html.DisplayNameFor(model => item.Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => item.Type)
+                @Html.DisplayNameFor(model => item.Photo)
             </th>
             <th></th>
         </tr>
@@ -36,10 +36,10 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.Content)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @Html.DisplayFor(modelItem => item.Photo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

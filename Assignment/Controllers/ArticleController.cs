@@ -48,7 +48,13 @@ namespace Assignment.Controllers
                 return View();
             }
             return RedirectToAction("SignIn", "Admin");
+        }
 
+        public ActionResult Detail(int id) {
+            if (Request.IsAuthenticated) {
+                return View(ArticleDAO.Detail(id));
+            }
+            return RedirectToAction("SignIn", "Admin");
         }
 
     }

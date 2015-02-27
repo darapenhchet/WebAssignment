@@ -19,8 +19,10 @@
             @try {
                 foreach (var item in Model.Posts) {
                     <div class="post-title">@Html.DisplayFor(model => item.Title)</div>
-                    <div class="post-date">@Html.DisplayFor(model => item.Date)</div>
+                    <div class="post-date">@Html.DisplayFor(model => item.OnDate)</div>
                     <div class="post-descritpion">@Html.DisplayFor(model => item.Content)</div>
+                <div class="post-descritpion">@Html.DisplayFor(model => item.Photo)</div>
+                <div class="post-descritpion">@Html.DisplayFor(model => item.ByUser)</div>
                 }       
             }
             catch (NullReferenceException ex) {  

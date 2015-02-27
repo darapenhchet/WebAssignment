@@ -11,8 +11,9 @@ namespace Assignment.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public string Photo { get; set; }
-        public string Category { get; set; }
-        public System.DateTime Date { get; set; }
+        public int Category { get; set; }
+        public System.DateTime OnDate { get; set; }
+        public int ByUser { get; set; }
     }
     
     public class SetPost
@@ -34,9 +35,13 @@ namespace Assignment.Models
         public string Photo { get; set; }
 
         [Display(Name = "Category")]
-        public string Category { get; set; }
+        public int Category { get; set; }
 
-        public System.DateTime Date { get; set; }
+        [Display(Name="Date")]
+        public System.DateTime OnDate { get; set; }
+
+        [Display(Name="User")]
+        public int ByUser { get; set; }
     }
 
 }

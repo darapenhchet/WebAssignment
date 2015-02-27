@@ -12,56 +12,25 @@ namespace Assignment.Models
 {
     public class ArticleDAO
     {
-        //private static string cs = "Data Source=RAVUTHZ;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
-        private static string cs = ConfigurationManager.ConnectionStrings["MyDBConnectionString1"].ConnectionString;
-
         public static bool Create(SetPost p)
         {
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                string sql = @"INSERT INTO [dbo].[Articles] ([Title], [Description], [Type])"
-                    + " VALUES (@title,  @description, @type)";
+            string sql = @"INSERT INTO [dbo].[Articles] ([Title], [Content], [Photo],[Category], [ByUser])  VALUES (@p1, @p2, @p3, @p4, @p5)";
+            return DB.Action(sql, p.Title, p.Content, p.Photo, AccountDAO.Id, p.Category);
+        }
 
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.Add(new SqlParameter("@title", SqlDbType.NVarChar)).Value = p.Title;
-                cmd.Parameters.Add(new SqlParameter("@description", SqlDbType.NVarChar)).Value = p.Content;
-                cmd.Parameters.Add(new SqlParameter("@type", SqlDbType.NVarChar)).Value = p.Category;
-
-                con.Open();
-                if (cmd.ExecuteNonQuery() != 0)
-                {
-                    cmd.Dispose();
-                    return true;
-                }
-                cmd.Dispose();
-                return false;
-            }
-
+        public static GetPost Detail(int id) {
+            string sql = null;
+            DataSet ds = new DataSet();
+            sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p1";
+            ds = DB.Query(sql, id);
+            return DB.GetPostDS(ds);
         }
 
         public static List<GetPost> List()
         {
-            using (SqlConnection con = new SqlConnection(cs))
-            {
-                List<GetPost> articles = new List<GetPost>();
-                string sql = @"SELECT * FROM [dbo].[Articles] order by Id desc";
-                SqlCommand cmd = new SqlCommand(sql, con);
-                con.Open();
-                SqlDataReader dat = cmd.ExecuteReader();
-
-                while (dat.Read())
-                {
-                    GetPost post = new GetPost
-                    {
-                        Id = (int)dat["Id"],
-                        Title = dat["Title"].ToString(),
-                        Content = dat["Description"].ToString(),
-                        Category = dat["Type"].ToString()
-                    };
-                    articles.Add(post);
-                }
-                return articles;
-            }
+            string sql = @"SELECT * FROM [dbo].[Articles]";
+            DataSet ds = DB.Query(sql);
+            return DB.GetAllPostDS(ds);
         }
     }
 }

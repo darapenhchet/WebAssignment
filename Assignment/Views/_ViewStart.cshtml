@@ -2,20 +2,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }*@
 
-@if (Request.IsAuthenticated) {
-    Assignment.Models.AccountDAO.FindUser(User.Identity.Name);
-}
-
 @{
+    if (Request.IsAuthenticated)
+    {
+        Assignment.Models.AccountDAO.FindUser(User.Identity.Name);
+    }
+    
     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
-
-    if (controller == "Admin" || controller == "Article")
-    {
-        Layout = "~/Views/Shared/_Admin.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    switch(controller.ToLower()) {
+        case "admin":
+            Layout = "~/Views/Shared/_Admin.cshtml";
+            break;
+        case "article":
+            Layout = "~/Views/Shared/_Admin.cshtml";
+            if (!Request.IsAuthenticated){
+                Response.Redirect("~/Admin/Sign");
+            }
+            break;
+        default:
+            Layout = "~/Views/Shared/_Layout.cshtml";
+            break;
+    }    
+    
 }
 

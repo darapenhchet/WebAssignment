@@ -73,7 +73,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                GetUser user = AccountDAO.DetailUser(AccountDAO.getId());
+                GetUser user = AccountDAO.DetailUser(AccountDAO.Id);
                 return View(user);
             }
             else
@@ -95,7 +95,7 @@ namespace Assignment.Controllers
             }
             return View();
         }
-
+        
         [HttpGet] 
         public ActionResult UpdateUser(int id = 0)
         {
@@ -135,7 +135,7 @@ namespace Assignment.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View(AccountDAO.DetailUser(AccountDAO.getId()));
+                return View(AccountDAO.DetailUser(AccountDAO.Id));
             }
             return RedirectToAction("SignIn", "Admin");   
         }

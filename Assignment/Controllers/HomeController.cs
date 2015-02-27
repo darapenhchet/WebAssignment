@@ -20,7 +20,7 @@ namespace Assignment.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ViewModel model) 
+        public ActionResult Index(ViewModel model)
         {
             if (ModelState.IsValid)
             {
