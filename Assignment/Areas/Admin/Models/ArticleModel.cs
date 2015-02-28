@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Assignment.Models
+namespace Assignment.Areas.Admin.Models
 {
     public class GetPost {
         public int Id { get; set; }

@@ -1,4 +1,4 @@
-﻿@model Assignment.Models.ViewModel
+﻿@model Assignment.Areas.Admin.Models.ViewModel
 @{
     ViewBag.Title = "Home";
 }
@@ -17,7 +17,7 @@
         <h3>Website Project</h3>
         <div>
             @try {
-                foreach (var item in Model.Posts) {
+                foreach (var item in Model.AllPosts) {
                     <div class="post-title">@Html.DisplayFor(model => item.Title)</div>
                     <div class="post-date">@Html.DisplayFor(model => item.OnDate)</div>
                     <div class="post-descritpion">@Html.DisplayFor(model => item.Content)</div>

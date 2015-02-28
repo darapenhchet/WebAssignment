@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Assignment.Models
+namespace Assignment.Areas.Admin.Models
 {
     public class ArticleDAO
     {
@@ -19,10 +19,8 @@ namespace Assignment.Models
         }
 
         public static GetPost Detail(int id) {
-            string sql = null;
-            DataSet ds = new DataSet();
-            sql = @"SELECT * FROM [dbo].[Users] WHERE Id = @p1";
-            ds = DB.Query(sql, id);
+            string sql = @"SELECT * FROM [dbo].[Articles] WHERE Id = @p1";
+            DataSet ds = DB.Query(sql, id);
             return DB.GetPostDS(ds);
         }
 

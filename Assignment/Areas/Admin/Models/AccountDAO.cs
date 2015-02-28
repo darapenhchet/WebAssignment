@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Assignment.Models
+namespace Assignment.Areas.Admin.Models
 {
     public class AccountDAO
     {

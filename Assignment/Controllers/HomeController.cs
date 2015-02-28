@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Assignment.Models;
+using Assignment.Areas.Admin.Models;
 
 namespace Assignment.Controllers
 {
@@ -12,10 +12,10 @@ namespace Assignment.Controllers
     {
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string msg)
         {
             ViewModel mymodel = new ViewModel();
-            mymodel.Posts = ArticleDAO.List();
+            mymodel.AllPosts = ArticleDAO.List();
             return View(mymodel);
         }
 

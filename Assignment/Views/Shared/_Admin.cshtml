@@ -15,15 +15,13 @@
     <header>
         <div class="container">
             <div class="profile">
-                
-                    <span>@Html.Encode(User.Identity.Name)</span>
-                    <ul>
-                        <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Admin")</li>
-                        <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Admin")</li>
-                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Admin")</li>
-                        <li>@Html.ActionLink("Sign Out", "SignOut", "Admin")</li>
-                    </ul> 
-                 
+                <span>@Html.Encode(User.Identity.Name)</span>
+                <ul>
+                    <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Sign Out", "SignOut", "Home", new { area = "admin"}, null)</li>
+                </ul>
             </div>
         </div>
     </header>
@@ -34,8 +32,10 @@
         <aside>
             <nav>
                 <ul>
-                    <li>@Html.ActionLink("Users Management", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("Articles Management", "Index", "Article")</li>
+                    <li>@Html.ActionLink("Users Management", "Index", "User", new { area = "Admin"}, null)</li>
+                    <li>@Html.ActionLink("Category Management", "Index", "Category", new { area = "Admin"}, null)</li>
+                    <li>@Html.ActionLink("Articles Management", "Index", "Article", new { area = "Admin"}, null)</li>
+                    <li>@Html.ActionLink("Profile Management", "Index", "Home", new { area = "Admin"}, null)</li>
                 </ul>
             </nav>
         </aside>

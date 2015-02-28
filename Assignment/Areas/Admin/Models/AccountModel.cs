@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Assignment.Models
+namespace Assignment.Areas.Admin.Models
 {
     /* For action Detail, List, Edit users */
     public class GetUser

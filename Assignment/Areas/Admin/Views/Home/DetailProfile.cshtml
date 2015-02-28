@@ -1,11 +1,11 @@
-﻿@model Assignment.Models.GetUser
+﻿@model Assignment.Areas.Admin.Models.GetUser
+
 @{
-    ViewBag.Title = "DetailUser";
+    ViewBag.Title = "DetailProfile";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-<h2>DetailUser</h2>
-<fieldset>
-    <legend>DetailUser</legend>
+<h2>DetailProfile</h2>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Username)
@@ -41,8 +41,7 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Lastname)
     </div>
-</fieldset>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Update", "updateprofile", "home", new { area = "admin" }, null) |
+    @Html.ActionLink("Back to List", "index", "home", new { area = "admin" }, null)
 </p>

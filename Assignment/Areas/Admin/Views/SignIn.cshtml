@@ -1,0 +1,33 @@
+﻿@model Assignment.Models.ViewModel
+
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>SignIn</h2>
+@using (Html.BeginForm("SignIn", "Admin"))
+{
+    @Html.ValidationSummary(true, "SignIn failed. Check your signin details."); 
+    <div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.SignIn.Username)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u => u.SignIn.Username)
+                @Html.ValidationMessageFor(u => u.SignIn.Username)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.SignIn.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u => u.SignIn.Password)
+                @Html.ValidationMessageFor(u => u.SignIn.Password)
+            </div>
+            <div class="editor-label">
+                @Html.CheckBoxFor(u => u.SignIn.Remember)
+                @Html.LabelFor(u => u.SignIn.Remember)
+            </div>
+            <input type="submit" value="Sign In" />
+    </div>
+}

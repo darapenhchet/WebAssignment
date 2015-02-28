@@ -15,9 +15,10 @@
             <div class="profile">
                 <span>@Html.Encode(User.Identity.Name)</span>
                 <ul>
-                    <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Admin")</li>
-                    <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Admin")</li>
-                    <li>@Html.ActionLink("Sign Out", "SignOut", "Admin")</li>
+                    <li>@Html.ActionLink("Detail Profile", "DetailProfile", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Update Profile", "UpdateProfile", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Home", new { area = "admin" }, null)</li>
+                    <li>@Html.ActionLink("Sign Out", "SignOut", "Home", new { area = "admin"}, null)</li>
                 </ul>
             </div>
         }

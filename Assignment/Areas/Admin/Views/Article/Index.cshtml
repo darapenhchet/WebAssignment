@@ -1,0 +1,67 @@
+﻿@model Assignment.Areas.Admin.Models.ViewModel
+
+@{
+    ViewBag.Title = "Article Management";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Article Management</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table>
+    @foreach (var item in Model.AllPosts) {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => item.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.OnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.ByUser)
+            </th>
+            <th></th>
+        </tr>
+        break;
+    }
+
+@foreach (var item in Model.AllPosts) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ByUser)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Detail", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,39 +1,45 @@
-﻿@model IEnumerable<Assignment.Models.GetUser>
+﻿@model Assignment.Areas.Admin.Models.ViewModel
 
 @{
-    ViewBag.Title = "List Users";
+    ViewBag.Title = "User Management";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-<h2>ListUsers2</h2>
+<h2>User Management</h2>
 <p>
-    @Html.ActionLink("Create New", "SignUp")
+    @Html.ActionLink("Create User", "Create")
 </p>
 <table>
+    @foreach (var item in Model.AllUsers)
+        {
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            Id
+            @Html.DisplayNameFor(model => item.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Username)
+            @Html.DisplayNameFor(model => item.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => item.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => item.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Firstname)
+            @Html.DisplayNameFor(model => item.Firstname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Lastname)
+            @Html.DisplayNameFor(model => item.Lastname)
         </th>
         <th></th>
     </tr>
+    break;
+    }
 
     @try { 
     
-        foreach (var item in Model)
+        foreach (var item in Model.AllUsers)
         {
             <tr>
                 <td>
@@ -55,9 +61,9 @@
                     @Html.DisplayFor(modelItem => item.Lastname)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateUser", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "DetailUser", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                    @Html.ActionLink("Update", "Update", new { id = item.Id }) |
+                    @Html.ActionLink("Detail", "Detail", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }    
@@ -69,3 +75,4 @@
     }
 
 </table>
+

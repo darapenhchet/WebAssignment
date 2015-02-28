@@ -1,0 +1,12 @@
+﻿@model Assignment.Areas.Admin.Models.ViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Admin/Home/Index</h2>
+
+@Html.ActionLink("Main Area Home", "Index", "Home", new { area = "" }, null)<br />
+@Html.ActionLink("Admin Area Home", "Index","Home", new { area = "Admin" }, null)<br />
+

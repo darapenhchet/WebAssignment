@@ -1,13 +1,14 @@
 ﻿@model Assignment.Models.InsertUser
 
 @{
-    ViewBag.Title = "Sign Up";
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-<h2>Register</h2>
+<h2>Create</h2>
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true, "SignUp failure. Check your signup details.");
+    @Html.ValidationSummary(true, "Create user failure. Check your input details.");
     <div>
         <fieldset>
             <legend>Login</legend>
