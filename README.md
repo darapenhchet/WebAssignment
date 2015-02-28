@@ -1,3 +1,25 @@
+# Web Assignment
+ថ្នាក់ E6
+សមាជិកក្រុម៖
+
+១. យ៉ូ វណ្ណារ៉ាវុទ្ធ
+
+២. សូ ជីវ័ន្ត
+
+៣. ជុង ឈន
+
+៤. តាំង គីមអ៊ូ
+
+៥. ដារ៉ា ពេញចិត្ត
+
+
+បច្ចេកវិទ្យាដែលក្រុមយើងខ្ញុំយកមកធ្វើការបង្កើតនូវកិច្ចការនេះមានដូចជា៖
+- HTML
+- CSS
+- JavaScript
+- ASP.NET MVC 4 ជាមួយ Razor
+- Database using Microsoft SQL Server
+
 # WebAssignment
 Web Assignment for Year 4 at RUPP
 
