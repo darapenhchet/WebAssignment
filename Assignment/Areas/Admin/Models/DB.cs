@@ -13,7 +13,7 @@ namespace Assignment.Areas.Admin.Models
 {
     public class DB
     {
-        private static string cs = "Data Source=RAVUTHZ;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
+        private static string cs = "Data Source=LOCALHOST;Initial Catalog=AssigmentDB;Integrated Security=True;Pooling=False";
         //private static string cs = ConfigurationManager.ConnectionStrings["MyDBConnectionString1"].ConnectionString;
 
         public static string ConnectionString { get; set; }
