@@ -1,7 +1,7 @@
 ﻿@*@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
-
+}
+*@
 @{
     /* check if not signin but have cookie signin again by cookie value */
     if (Request.IsAuthenticated)
@@ -12,7 +12,8 @@
     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
     switch(controller.ToLower()) {
         case "admin":
-            Layout = "~/Views/Shared/_Admin.cshtml";
+            //Layout = "~/Views/Shared/_Admin.cshtml";
+            Layout = "~/Views/Shared/_Layout.cshtml";
             break;
         case "article":
             Layout = "~/Views/Shared/_Admin.cshtml";

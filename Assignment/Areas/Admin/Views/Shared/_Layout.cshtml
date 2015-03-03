@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/admin/layout.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div id="sidebar-nav" class="col-lg-3">
+                <div class="sidebar-nav">
+                    <ul class="nav nav-list">
+                        <!--<li class="nav-header">1st Navigation Header</li>-->
+                        <li><img src="~/Content/photo.png" class="img-responsive" alt="Responsive image"></li>
+                        @*
+                        <li>@Html.ActionLink("អត្ថបទ","../../admin/articles")</li>
+                        <li>@Html.ActionLink("ប្រភេទអត្ថបទ","../../admin/categories")</li>
+                        <li>@Html.ActionLink("អ្នកប្រើប្រាស់","../../admin/users")</li>
+                        <li>@Html.ActionLink("ចាកចេញ","../../admin/users/logout")</li>
+                        *@
+                    </ul>
+                </div>
+            </div>
+        <div class="col-lg-9">
+            @RenderSection("featured", required: false)
+            <div class="row clearfix" id="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+ </div>
+ <!-- Full width with container-fluid -->
+ 
+ @Scripts.Render("~/bundles/jquery")
+ <script type="text/javascript" src="~/Scripts/bootstrap.min.js">
+
+ </script>
+</body>
+</html>
